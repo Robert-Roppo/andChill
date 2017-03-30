@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Local Css-->
+    <link rel="stylesheet" href="style.css">
+    <title>andChill</title>
+    <link href="bootstrap/CSS/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-controller="mainCtrl">
+
+<!--Navbar-->
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top topnav" role="navigation">
+    <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand topnav" href="#/">andChill</a>
+        </div>
+    </div>
+</nav>
+
+<div ng-view></div>
+
+
+        <!--Bootstrap JS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="bootstrap/JS/bootstrap.min.js"></script>
+
+        <!--Project JS-->
+        <script src="angular.js"></script>
+        <script src="angular-route.js"></script>
+        <script src="controller.js"></script>
+</body>
+</html>
