@@ -15,10 +15,25 @@ app.config(function ($routeProvider) {
             templateUrl : 'pages/scene.html',
             controller : 'sceneCtrl'
         })
-        
-        .when('/action', {
-            templateUrl : 'pages/action.html',
-            controller : 'actionCtrl'
+
+        .when('/actionAdventureCombo', {
+            templateUrl: 'pages/actionAdventureCombo.html',
+            controller: 'actionAdventureComboCtrl'
+        })
+
+        .when('/familyActionAdventure', {
+            templateUrl: 'pages/familyActionAdventure.html',
+            controller: 'familyActionAdventureCtrl'
+        })
+
+        .when('/actionWHorror', {
+            templateUrl : 'pages/actionWHorror.html',
+            controller : 'actionWHorrorCtrl'
+        })
+
+        .when('/actionWOHorror', {
+            templateUrl : 'pages/actionWOHorror.html',
+            controller : 'actionWOHorrorCtrl'
         })
 
         .when('/service', {
@@ -29,6 +44,21 @@ app.config(function ($routeProvider) {
         .when('/chillin', {
             templateUrl : 'pages/chillin.html',
             controller : 'chillinCtrl'
+        })
+
+        .when('/familyScene', {
+            templateUrl: 'pages/familyScene.html',
+            controller: 'familySceneCtrl'
+        })
+
+        .when('/groupScene', {
+            templateUrl: 'pages/groupScene.html',
+            controller: 'groupSceneCtrl'
+        })
+
+        .when('/coupleScene', {
+            templateUrl: 'pages/coupleScene.html',
+            controller: 'coupleSceneCtrl'
         })
 
         .when('/adventure', {
@@ -63,7 +93,7 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('serviceCtrl', function ($scope, services) {
-    $scope.question = 'How do you chill?';
+    $scope.question = 'Pick your services:';
     $scope.answers = [
         { answerID: '1', answer: 'Netflix img' },
         { answerID: '2', answer: 'Amazon img' },
@@ -82,15 +112,15 @@ app.controller('serviceCtrl', function ($scope, services) {
     $scope.saveServices = function () {
         $scope.services = [''];
         angular.forEach($scope.serviceModel, function (value, key) {
-           if (value == true) {
-               services.addSource(key);
-           }
+            if (value === true) {
+                services.addSource(key);
+            }
         });
     };
 });
 
 app.controller('sceneCtrl', function ($scope) {
-   $scope.question = "What\'s looking good?"
+    $scope.question = "What\'s looking good?"
 });
 
 app.controller('chillinCtrl', function ($scope) {
@@ -103,8 +133,56 @@ app.controller('chillinCtrl', function ($scope) {
     ];
 });
 
-app.controller('actionCtrl', function ($scope) {
+app.controller('coupleSceneCtrl', function($scope){
     $scope.question = 'What scene do you chill to?';
+    $scope.answer = [
+        {answerID: '1', answer: 'Action img'},
+        {answerID: '2', answer: 'Horror img'},
+        {answerID: '3', answer: 'Romance img'},
+        {answerID: '4', answer: 'Comedy img'}
+    ];
+});
+
+app.controller('groupSceneCtrl', function($scope){
+    $scope.question = 'What scene do you chill to?';
+    $scope.answer = [
+        {answerID: '1', answer: 'Action img'},
+        {answerID: '2', answer: 'Adventure img'},
+        {answerID: '3', answer: 'Comedy img'},
+        {answerID: '4', answer: 'Romance img'}
+    ];
+});
+
+app.controller('familySceneCtrl', function($scope){
+    $scope.question = 'What scene do you chill to?';
+    $scope.answer = [
+        {answerID: '1', answer: 'Action img'},
+        {answerID: '2', answer: 'Adventure img'},
+        {answerID: '3', answer: 'Family img'},
+        {answerID: '4', answer: 'Animation img'},
+        {answerID: '5', answer: 'Musicals img'},
+        {answerID: '6', answer: 'TV Movies img'}
+    ];
+});
+
+app.controller('actionAdventureComboCtrl', function($scope){
+    $scope.question = 'What scene looks best?';
+    $scope.answers=[
+        {answerID: '1', answer: 'Action img'},
+        {answerID: '2', answer: 'Adventure img'}
+    ]
+});
+
+app.controller('familyActionAdventureCtrl', function($scope){
+    $scope.question = 'What interests you more?';
+    $scope.answers=[
+        {answerID: '1', answer: 'Action img'},
+        {answerID: '2', answer: 'Adventure img'}
+    ]
+});
+
+app.controller('actionWHorrorCtrl', function ($scope) {
+    $scope.question = 'Pick an action:';
     $scope.answers = [
         { answerID: '1', answer: 'Action img', genreID: '28' },
         { answerID: '2', answer: 'Crime img', genreID: '80'},
@@ -114,8 +192,18 @@ app.controller('actionCtrl', function ($scope) {
     ];
 });
 
-app.controller('adventureCtrl', function ($scope) {
+app.controller('actionWOHorrorCtrl', function ($scope) {
     $scope.question = 'What scene do you chill to?';
+    $scope.answers = [
+        { answerID: '1', answer: 'Action img', genreID: '28' },
+        { answerID: '2', answer: 'Crime img', genreID: '80'},
+        { answerID: '3', answer: 'Thriller img', genreID: '53' },
+        { answerID: '4', answer: 'War img', genreID: '10752' }
+    ];
+});
+
+app.controller('adventureCtrl', function ($scope) {
+    $scope.question = 'Where would you like to go?';
     $scope.answers = [
         { answerID: '1', answer: 'Adventure img', genreID: '12' },
         { answerID: '3', answer: 'Comedy img', genreID: '35' },
@@ -145,7 +233,7 @@ app.controller('romanceCtrl', function ($scope) {
 });
 
 app.controller('docCtrl', function ($scope) {
-    $scope.question = 'What scene do you chill to?';
+    $scope.question = 'What do you want to fall asleep to?';
     $scope.answer = [
         { answerID: '1', answer: 'Documentary img', genreID: '99' },
         { answerID: '2', answer: 'Foreign img', genreID: '10769' },
@@ -153,6 +241,7 @@ app.controller('docCtrl', function ($scope) {
         { answerID: '4', answer: 'Western img', genreID: '37' }
     ];
 });
+
 
 app.controller('resultCtrl', function ($scope, $http, $routeParams, services) {
     console.log(services.getSource());
@@ -165,7 +254,7 @@ app.controller('resultCtrl', function ($scope, $http, $routeParams, services) {
         }
     }).then(function successCallback(response) {
         $http.get("http://www.omdbapi.com/?i="
-            + response.data['0'].imdb + "&plot=short&r=json&tomatoes=true")
+            + 'tt0458339' + "&plot=short&r=json&tomatoes=true")
             .then(function(response) {
                 $scope.details = response.data; /* stores the JSON data in the details scope */
             });

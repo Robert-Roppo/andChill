@@ -8,19 +8,14 @@
 
 $conn = dbConnect();
 
-$input = json_decode(file_get_contents('php://input'), true);
-$genre = $input['genres'];
-$sources = $input['sources'];
 $type = 'themoviedb';
-
+$genre = 18;
 $ids = generateList($genre);
 $results = idCheck($conn, $ids, $type);
+$sources = array('netflix');
 $valid = sourceCheck($conn, $results, $sources);
-//$rated = calcRating($conn, $valid);
 
 $conn->close();
-
-echo json_encode($valid);
 
 function generateList($genreID) {
     $usURL = "http://api.themoviedb.org/3/discover/movie?";
@@ -120,14 +115,12 @@ function sourceCheck($conn, $ids, $sources) {
     return $validFilms;
 }
 
-
-/**
 function calcRating($conn, $films) {
 
     $sortedFilms = array();
 
     foreach ($films as $film) {
-        $query = "SELECT `rating` FROM `ratings` WHERE id=" . $film['id'];
+        $query = "SELECT * FROM `ratings` WHERE id=" . $film['id'];
         $result = $conn->query($query);
 
         if ($result->num_rows == 0) {
@@ -139,25 +132,9 @@ function calcRating($conn, $films) {
             $rating = ($OMDb['Metascore']*0.25) + (($OMDb['imdbRating']*10)*0.2)
                 + ($OMDb['tomatoMeter']*0.15) + ($OMDb['tomatoUserMeter']*0.4);
 
-            $conn->query("UPDATE `ratings` SET `rating` = ".$rating." WHERE `id`=".$film['id']);
 
-            $film['rating'] = $rating;
-
-            array_push($sortedFilms, $film);
-        } else {
-            $film['rating'] = $result;
-
-            array_push($sortedFilms, $film);
+            
         }
     }
-
-    $ratings = array();
-    foreach ($sortedFilms as $rating => $row) {
-        $ratings[$rating] = $row['rating'];
-    }
-    array_multisort($ratings, SORT_DESC, $sortedFilms);
-    
-    return $sortedFilms;
-} */
-
+}
 
